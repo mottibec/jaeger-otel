@@ -1,0 +1,20 @@
+receivers:
+  jaeger:
+    protocols:
+      grpc:
+
+exporters:
+  logging:
+    loglevel: debug
+
+extensions:
+  health_check:
+    port: 8090
+
+service:
+  extensions: [health_check]
+  pipelines:
+    traces:
+      receivers: [jaeger]
+      processors: []
+      exporters: [logging]
